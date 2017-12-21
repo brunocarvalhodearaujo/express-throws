@@ -1,5 +1,4 @@
 import { HttpError } from './HttpError'
-import http from 'http-status'
 
 /**
  * @param {HttpError} error
@@ -14,11 +13,11 @@ function middleware (error, request, response, next) {
 
   if (!(error instanceof HttpError)) {
     if (typeof error === 'number') {
-      error = new HttpError(http[ error ], error)
+      error = new HttpError(error)
     }
 
     if (typeof error === 'object') {
-      error = new HttpError(error.type || error.message || error.description, error.code, error.error)
+      error = new HttpError(error.name || error.message || error.description, error.code, error.error, error.type)
     }
 
     if (!(error instanceof HttpError)) {
@@ -28,13 +27,7 @@ function middleware (error, request, response, next) {
 
   response
     .status(error.code)
-    .json({
-      error: {
-        code: error.code,
-        type: http[ error.code ],
-        message: error.message
-      }
-    })
+    .json({ error: error.toJSON() })
 }
 
 export default () => middleware
