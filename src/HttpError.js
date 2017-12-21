@@ -1,23 +1,18 @@
-import pickBy from 'lodash.pickby'
-import http from 'http-status'
+// @flow
 
-export class HttpError extends Error {
+export class HttpError {
+  code: number
+  description: string | void
+  type: string | void
+
   /**
    * @param {number} code
-   * @param {string} message
+   * @param {string} [description]
    * @param {string} [type]
    */
-  constructor (code, message, type) {
-    super(message)
+  constructor (code: number, description?: string, type?: string) {
     this.code = code
-    this.type = type || http[ this.code ]
-  }
-
-  toJSON () {
-    return pickBy({
-      code: this.code,
-      type: this.type,
-      message: this.message
-    })
+    this.description = description
+    this.type = type
   }
 }
