@@ -1,12 +1,12 @@
 export class HttpError {
   /**
    * @param {number} code
-   * @param {string} [description]
+   * @param {string} [message]
    * @param {string} [type]
    */
-  constructor (code, description, type) {
+  constructor (code, message, type) {
     this.code = code
-    this.description = description
+    this.message = message
     this.type = type
   }
 }

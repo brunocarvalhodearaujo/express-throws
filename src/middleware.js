@@ -39,7 +39,7 @@ function middleware (error, request, response, next) {
       error: {
         code: error.code,
         type: error.type || http[ error.code ],
-        description: error.description
+        message: error.message
       }
     })
 }

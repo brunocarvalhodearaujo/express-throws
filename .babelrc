@@ -1,6 +1,5 @@
 {
   "plugins": [
-    "transform-flow-strip-types",
     "transform-inline-imports-commonjs",
     "transform-object-rest-spread"
   ]
