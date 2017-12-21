@@ -1,16 +1,20 @@
-// @flow
-
 import { HttpError } from './HttpError'
 import http from 'http-status'
-import type { Request, Response } from 'express'
 
 /**
- * @param {HttpError} error
- * @param {express.Request} request
- * @param {express.Response} response
- * @param {express.NextFunction} next
+ * @typedef {{}} Request
+ * @typedef {{ status: (code: number) => Response, json: (data: any) => Response }} Response
+ * @typedef {(stack: any) => void} NextFunction
  */
-export function middleware (error: Error | HttpError | any, request: Request, response: Response, next: (stack: any) => void) {
+
+/**
+ * @param {HttpError | Error} error
+ * @param {Request} request
+ * @param {Response} response
+ * @param {NextFunction} next
+ * @returns {void}
+ */
+function middleware (error, request, response, next) {
   if (!error) {
     next()
   }
@@ -29,13 +33,15 @@ export function middleware (error: Error | HttpError | any, request: Request, re
     }
   }
 
-  error = {
-    code: error.code,
-    type: error.type || http[ error.code ],
-    description: error.description
-  }
-
   response
     .status(error.code)
-    .json({ error })
+    .json({
+      error: {
+        code: error.code,
+        type: error.type || http[ error.code ],
+        description: error.description
+      }
+    })
 }
+
+export default () => middleware

@@ -1,11 +1,5 @@
 export declare class HttpError extends Error {
-  constructor(code: number, message: string, type?: string)
-
-  toJSON(): {
-    code: number,
-    message: string,
-    type: string
-  }
+  constructor(code: number, description: string, type?: string)
 }
 
 export default function (): void
