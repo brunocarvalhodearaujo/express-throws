@@ -17,7 +17,7 @@ function middleware (error, request, response, next) {
     }
 
     if (typeof error === 'object') {
-      error = new HttpError(error.name || error.message || error.description, error.code, error.error, error.type)
+      error = new HttpError(error.name || error.message || error.description, error.code || error.error, error.type)
     }
 
     if (!(error instanceof HttpError)) {
