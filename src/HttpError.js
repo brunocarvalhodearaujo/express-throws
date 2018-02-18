@@ -1,4 +1,4 @@
-export class HttpError {
+module.exports = class HttpError {
   /**
    * @param {number} code
    * @param {string} [message]

@@ -1,5 +1,5 @@
-import { HttpError } from './HttpError'
-import http from 'http-status'
+const HttpError = require('./HttpError')
+const http = require('http-status')
 
 /**
  * @typedef {{}} Request
@@ -44,4 +44,4 @@ function middleware (error, request, response, next) {
     })
 }
 
-export default () => middleware
+module.exports = () => middleware
