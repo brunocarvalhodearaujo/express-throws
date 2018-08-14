@@ -1,6 +1,6 @@
 {
   "name": "express-throws",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "express error handler which displays json",
   "author": "Bruno Carvalho de Araujo <brunocarvalhodearaujo@gmail.com>",
   "license": "MIT",
